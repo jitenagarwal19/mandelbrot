@@ -1,6 +1,30 @@
 <html>
-    <script src='app.js' async></script>
-    <body  onload = 'drawMandelbrot()'>
-        <canvas id='mandelbrotCanvas' height='800' width='800'></canvas>
-    </body>
+<script src='app.js' async></script>
+<link rel="stylesheet" href="style.css">
+
+<body onload='onBodyLoad()'>
+    <div id="main_container">
+
+        <div id='option_dialog'>
+            
+            <div id="spinner_container">
+                <div><b>Resolution of Manelbrot</b></div>
+                <span class="spinner_label" id="min_label">rough (faster)</span>
+                <input type="range" id='slider'>
+                <span class="spinner_label" id="max_label">smooth (slower)</span>
+            </div>
+            
+            <div><input type="number" placeholder="infinity check integer" id='infinity_iteration_field'></div>
+           
+            <div><input type="number" placeholder="radius" id='radius_field'></div>
+            <button type='button' onclick='drawMandelbrotButtonPressed()'>Draw Mandelbrot</button>
+        </div>
+
+        <div id="canvas_container">
+            <img src="loader.gif" alt="loading..." id="loader">
+            <canvas id='mandelbrot_canvas' height='800' width='800'></canvas>
+        </div>
+    </div>
+</body>
+
 </html>

@@ -1,0 +1,63 @@
+#option_dialog {
+    
+    display: flex; 
+    flex-flow: column;
+    width: 400px;
+    padding: 40px;
+    align-self: center;
+    box-shadow: 10px 10px grey;
+    margin: 0 0px 50px;
+    background: blanchedalmond;
+}
+input {
+    margin:5px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid black;
+    padding: 4px;
+}
+#canvas_container {
+    position: relative;
+    border:1px solid green;
+    align-self: center;
+}
+button {
+    margin:5px 0px;
+    height: 40px;
+    border: 1px solid black;
+    font-family: sans-serif;
+    font-size: x-large;
+    border-radius: 10px;
+    background: lightyellow;
+}
+#loader {
+    z-index: 1000;
+    border: 1px solid green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+#slider {
+    width: 300px;
+     margin: 20px 40px;
+     cursor: pointer;
+}
+#main_container {
+    display: flex;
+    flex-flow: column;
+}
+.spinner_label {
+    position: absolute;
+    bottom: 5%;
+}
+#max_label {
+    right: 5%;
+}
+#min_label {
+    left: 5%;
+}
+#spinner_container {
+    position: relative
+}
