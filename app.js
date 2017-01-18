@@ -3,6 +3,7 @@ var DOM_ID = {
     ITERATION_FIELD: 'iteration_field',
     RADIUS_FIELD: 'radius_field',
     MANDELBROT_CANVAS: 'mandelbrot_canvas',
+    COLOR_SCHEME_SELECT: 'color_scheme_select',
     LOADER: 'loader',
     SLIDER: 'slider',
 };
@@ -57,6 +58,7 @@ function getColorString(i) {
     var color = i.toString(16);
     return "#" + color + color + color;
 }
+
 function getScaleFactor(XYiteration) {
     var canvasHeight = mandelbrotCanvas.height;
     var canvasWidth = mandelbrotCanvas.width;
@@ -102,12 +104,12 @@ function HSVtoRGB(h, s, v) {
         case 4: r = t, g = p, b = v; break;
         case 5: r = v, g = p, b = q; break;
     }
-    color =  {
+    color = {
         r: Math.round(r * 255),
         g: Math.round(g * 255),
         b: Math.round(b * 255)
     };
-    return '#' + color.r.toString(16) + color.r.toString(16)+ color.r.toString(16);
+    return '#' + color.r.toString(16) + color.r.toString(16) + color.r.toString(16);
 }
 function HSVtoRGB(h, s, v) {
     var r, g, b, i, f, p, q, t;
@@ -127,10 +129,35 @@ function HSVtoRGB(h, s, v) {
         case 4: r = t, g = p, b = v; break;
         case 5: r = v, g = p, b = q; break;
     }
-    
-        return '#' +  Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
-        
-    
+
+    return '#' + Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
+
+
+}
+function getGrayScaleColor(escapeCount) {
+    escapeCount = escapeCount/mandelbrotParams.Iiteration * 255;
+    return getColorString(Math.floor(escapeCount));
+}
+function getSmoothedGrayScaleCole(escapeCount, smoothColor) {
+    return getColorString(Math.floor(smoothColor * 255 / mandelbrotParams.Iiteration));
+}
+function getColor(escapeCount, smoothColor) {
+    var colorSchemes = ['without_smoothing', 'with_smoothing', 'something_beautiful', 'surprise_me'];
+    switch (mandelbrotParams.colorScheme) {
+        case colorSchemes[0]:
+            return getGrayScaleColor(escapeCount);
+            break;
+        case colorSchemes[1]:
+            return getSmoothedGrayScaleCole(escapeCount, smoothColor);
+            break;
+        case colorSchemes[2]:
+        console.log('here2');
+            break;
+        case colorSchemes[3]:
+        console.log('here3');
+            break;
+
+    }
 }
 function drawMandelbrot() {
     var x, y;
@@ -157,15 +184,12 @@ function drawMandelbrot() {
                 zMagnitude = (zx * zx + zy * zy);
                 i++;
                 smoothColor += Math.exp(-1 * getMagnitudeOfComplex(zx, zy))
-            } while (i < 255 && zMagnitude < (radius * radius));
-            smoothColor =(smoothColor) / 255;
-            // smoothColor = Math.floor(smoothColor)
-            // console.log(smoothColor);
-            // if (smoothColor > 0)
-            //     console.log("smooth Color value " + x + '  '+  y + '  ' + smoothColor);
-            drawOnCanvas(x, y, getScaleFactor(XYiteration), HSVtoRGB(.45 + 10*smoothColor, .8, .9));
+            } while (i < Iiteration && zMagnitude < (radius * radius));
+            // drawOnCanvas(x, y, getScaleFactor(XYiteration), HSVtoRGB(.45 + 10 * smoothColor, .8, .9));
+            drawOnCanvas(x, y, getScaleFactor(XYiteration), getColor(i, smoothColor));
         }
     }
+    getColor()
     mandelbrotDrawCompleted();
 }
 
@@ -186,18 +210,17 @@ function fillMandelbrotParamsFromUI() {
     if (document.getElementById(DOM_ID.RADIUS_FIELD) && document.getElementById(DOM_ID.RADIUS_FIELD).value) {
         mandelbrotParams.radius = document.getElementById(DOM_ID.RADIUS_FIELD).value;
     }
-    console.log('slider value ' + document.getElementById('slider').value);
+    if (document.getElementById(DOM_ID.COLOR_SCHEME_SELECT) && document.getElementById(DOM_ID.COLOR_SCHEME_SELECT).value) {
+        mandelbrotParams.colorScheme = document.getElementById(DOM_ID.COLOR_SCHEME_SELECT).value;
+    }
+    console.log('color scheme selected ' + mandelbrotParams.colorScheme);
 }
 var drawMandelbrotButtonPressed = function () {
     if (isDrawingInProgress) {
         isDrawingInProgress = false;
         fillMandelbrotParamsFromUI();
-        console.log('hey there')
         mandelbrotDrawStarted();
-
         setTimeout(drawMandelbrot, 100);
-
-        console.log('hey there1231')
         isDrawingInProgress = true;
     }
 }
