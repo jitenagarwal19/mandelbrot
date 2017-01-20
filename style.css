@@ -39,7 +39,6 @@ button {
 }
 #loader {
     z-index: 1000;
-    border: 1px solid green;
     position: absolute;
     top: 50%;
     left: 50%;
