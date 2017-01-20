@@ -12,6 +12,27 @@ var mandelbrotParams = {
     XYiteration: 320,
     Iiteration: 200,
     radius: 2,
+};
+ var colorSchemes = ['without_smoothing', 'with_smoothing', 'something_beautiful', 'surprise_me'];
+var colorSchemeMapping = {
+    without_smoothing :{ 
+        text: "Without Smoothing",
+    },
+    with_smoothing:{
+        text: "With Smoothing",
+    },
+    something_beautiful :{
+        text:"Something Beautiful"
+    },
+    surprise_me: {
+        text:"Surprise Me!"
+    }
+
+}
+var colorUtilitiesMethod = {
+    generateColors : function(){},
+    getGrayScaleString : function(){},
+    
 }
 var colorArray = [];
 function generateColors(maxIter) {
@@ -135,14 +156,15 @@ function HSVtoRGB(h, s, v) {
 
 }
 function getGrayScaleColor(escapeCount) {
-    escapeCount = escapeCount/mandelbrotParams.Iiteration * 255;
+    escapeCount = escapeCount / mandelbrotParams.Iiteration * 255;
     return getColorString(Math.floor(escapeCount));
 }
 function getSmoothedGrayScaleCole(escapeCount, smoothColor) {
     return getColorString(Math.floor(smoothColor * 255 / mandelbrotParams.Iiteration));
 }
+
 function getColor(escapeCount, smoothColor) {
-    var colorSchemes = ['without_smoothing', 'with_smoothing', 'something_beautiful', 'surprise_me'];
+   
     switch (mandelbrotParams.colorScheme) {
         case colorSchemes[0]:
             return getGrayScaleColor(escapeCount);
@@ -151,10 +173,11 @@ function getColor(escapeCount, smoothColor) {
             return getSmoothedGrayScaleCole(escapeCount, smoothColor);
             break;
         case colorSchemes[2]:
-        console.log('here2');
+            smoothColor /= mandelbrotParams.Iiteration
+            return HSVtoRGB(.45 + 10 * smoothColor, .8, .9)
             break;
         case colorSchemes[3]:
-        console.log('here3');
+            return HSVtoRGB(.45 + 10 * smoothColor, 5, 100)
             break;
 
     }
@@ -167,7 +190,7 @@ function drawMandelbrot() {
     var radius = mandelbrotParams.radius;
     var denominator = getDenominator(radius, XYiteration);
     var zMagnitude;
-    var smoothColor;
+
     getScaleFactor();
     for (x = 0; x < XYiteration; x++) {
         for (y = 0; y < XYiteration; y++) {
