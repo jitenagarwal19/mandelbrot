@@ -92,8 +92,7 @@ var DomManipulation = function () {
                 textNode = document.createTextNode(colorSchemeMapping[key].text);
                 optionNode.appendChild(textNode);
                 optionNode.setAttribute("value", key);
-                selectNode.appendChild(optionNode)
-                console.log("hey there node with value " + key + " added successfully");
+                selectNode.appendChild(optionNode);
             }
         }
     }
