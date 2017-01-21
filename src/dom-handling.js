@@ -20,6 +20,7 @@ var DomManipulation = function () {
         document.getElementById(DOM_ID.INFINITY_ITERATION_FIELD).value = mandelbrotParams.XYiteration.toString();
         document.getElementById(DOM_ID.RADIUS_FIELD).value = mandelbrotParams.radius.toString();
         setUpSlider();
+        initSelectOptions();
     }
     function setUpSlider() {
         var slider = document.getElementById(DOM_ID.SLIDER);
@@ -66,9 +67,36 @@ var DomManipulation = function () {
         }
 
     }
+    this.validateFields = function () {
+        var message = ""
 
-
-
+        if (!getValueById(DOM_ID.INFINITY_ITERATION_FIELD)) {
+            message = "Please enter an appropiate value in Escape Iteration Field";
+        } else if (getValueById(DOM_ID.INFINITY_ITERATION_FIELD) <= 0) {
+            message = "Please enter a positive value in Escape Iteration Field";
+        } else if (!getValueById(DOM_ID.RADIUS_FIELD)) {
+            message = "Please enter an appropiate value in Escape Radius Field";
+        }
+        if (message) {
+            alert(message);
+            return false;
+        }
+        return true;
+    }
+    var initSelectOptions = function () {
+        var selectNode = document.getElementById(DOM_ID.COLOR_SCHEME_SELECT);
+        var optionNode, textNode;
+        if (selectNode) {
+            for (key in colorSchemeMapping) {
+                optionNode = document.createElement("option");
+                textNode = document.createTextNode(colorSchemeMapping[key].text);
+                optionNode.appendChild(textNode);
+                optionNode.setAttribute("value", key);
+                selectNode.appendChild(optionNode)
+                console.log("hey there node with value " + key + " added successfully");
+            }
+        }
+    }
     init();
 
 }

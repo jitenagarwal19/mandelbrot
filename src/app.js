@@ -76,9 +76,12 @@ var drawMandelbrotButtonPressed = function () {
     if (isDrawingInProgress) {
         isDrawingInProgress = false;
         fillMandelbrotParamsFromUI();
-        if (colorSchemeMapping[mandelbrotParams.colorScheme].init) colorSchemeMapping[mandelbrotParams.colorScheme].init();
-        mandelbrotDrawStarted();
-        setTimeout(drawMandelbrot, 100);
-        isDrawingInProgress = true;
+        if (colorSchemeMapping[mandelbrotParams.colorScheme].init)
+            colorSchemeMapping[mandelbrotParams.colorScheme].init();
+        if (domManipulation.validateFields()) {
+            mandelbrotDrawStarted();
+            setTimeout(drawMandelbrot, 100);
+            isDrawingInProgress = true;
+        }
     }
 }

@@ -7,7 +7,6 @@ var colorUtilitiesMethod = {
             g = Math.floor(Math.random() * 255).toString(16);
             b = Math.floor(Math.random() * 255).toString(16);
             color = "#" + r + g + b;
-            // console.log('color at ' + i + "  " + color);
             colorArray[i] = color;
         }
     },
@@ -21,7 +20,8 @@ var colorUtilitiesMethod = {
         return "#" + r + g + b;
     },
     HSVtoRGB: function (h, s, v) {
-        var r, g, b, i, f, p, q, t;
+        var r, g, b;
+        var i, f, p, q, t;
         if (arguments.length === 1) {
             s = h.s, v = h.v, h = h.h;
         }
@@ -39,7 +39,7 @@ var colorUtilitiesMethod = {
             case 5: r = v, g = p, b = q; break;
         }
 
-        return '#' + Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
+        return this.getColorString(r * 255, g * 255, b * 255);
     },
   
     generateRandomForSurpiseMe : function() {

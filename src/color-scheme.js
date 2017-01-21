@@ -22,7 +22,6 @@ var colorSchemeMapping = {
     },
     surprise_me: {
         text: "Surprise Me!",
-        
         init: function() {
             this.randomNumbers = colorUtilitiesMethod.generateRandomForSurpiseMe();
             console.log(JSON.stringify(this.randomNumbers));

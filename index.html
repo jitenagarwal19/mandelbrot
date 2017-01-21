@@ -1,10 +1,12 @@
 <html>
-
+<head>
+    <title>Mandelbrot</title>
+</head>
 <body onload='onBodyLoad()'>
 <div id="main_container">
 
     <div id='option_dialog'>
-
+        <h1 style="text-align: center">Mandelbrot</h1>
         <div id="spinner_container">
             <div><b>Resolution of Manelbrot</b></div>
             <span class="spinner_label" id="min_label">rough (faster)</span>
@@ -23,12 +25,7 @@
             </tr>
             <tr>
                 <td>Color Scheme</td>
-                <td><select id='color_scheme_select'>
-                    <option value="without_smoothing">Without Smoothing</option>
-                    <option value="with_smoothing">With Smoothing</option>
-                    <option value="something_beautiful">Something Beautiful</option>
-                    <option value="surprise_me">Surprise Me!*</option>
-                </select></td>
+                <td><select id='color_scheme_select'></select></td>
             </tr>
         </table>
     

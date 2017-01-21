@@ -3,7 +3,7 @@
     display: flex; 
     flex-flow: column;
     width: 400px;
-    padding: 40px;
+    padding: 20px;
     align-self: center;
     box-shadow: 10px 10px grey;
     margin: 0 0px 50px;
