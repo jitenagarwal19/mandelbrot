@@ -41,5 +41,14 @@ var colorUtilitiesMethod = {
 
         return '#' + Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
     },
+  
+    generateRandomForSurpiseMe : function() {
+        return {
+            h1:Math.random(),
+            s:Math.random(),
+            v:Math.random() ,
+            h2:Math.floor(Math.random() * 100%15),
+        }
+    }
 
 }

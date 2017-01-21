@@ -22,9 +22,14 @@ var colorSchemeMapping = {
     },
     surprise_me: {
         text: "Surprise Me!",
+        
+        init: function() {
+            this.randomNumbers = colorUtilitiesMethod.generateRandomForSurpiseMe();
+            console.log(JSON.stringify(this.randomNumbers));
+        },  
         method: function (params) {
             params.smoothColor /= params.Iiteration;
-            return colorUtilitiesMethod.HSVtoRGB(.35 + 15 * params.smoothColor, .8, .9);
+            return colorUtilitiesMethod.HSVtoRGB(this.randomNumbers.h1 + this.randomNumbers.h2 * params.smoothColor, .8, this.randomNumbers.v);
         }
     }
 

@@ -33,12 +33,42 @@ var DomManipulation = function () {
     this.getMandelbrotCanvas = function () {
         return mandelbrotCanvas;
     }
-    this.getCanvasContext = function() {
+    this.getCanvasContext = function () {
         return mandelbrotCanvas.getContext('2d');
     }
-    this.clearCanvas = function() {
+    this.clearCanvas = function () {
         this.getCanvasContext().clearRect(0, 0, mandelbrotCanvas.width, mandelbrotCanvas.height);
     }
+    this.showElementById = function (elementId, shouldShow) {
+        var element = document.getElementById(elementId);
+        if (element) {
+            element.style.display = shouldShow ? '' : 'none';
+        }
+    }
+    this.drawOnCanvas = function (x, y, scaleFactor, color) {
+        var context = this.getCanvasContext();
+        context.beginPath();
+        context.rect(scaleFactor * x, scaleFactor * y, scaleFactor, scaleFactor);
+        context.fillStyle = color;
+        context.fill();
+    }
+    function getValueById(documentId) {
+        if (document.getElementById(documentId)) {
+            return document.getElementById(documentId).value;
+        }
+    }
+    this.getMandelbrotParamsFromUI = function () {
+        return {
+            Iiteration: getValueById(DOM_ID.INFINITY_ITERATION_FIELD),
+            XYiteration: getValueById(DOM_ID.SLIDER),
+            radius: getValueById(DOM_ID.RADIUS_FIELD),
+            colorScheme: getValueById(DOM_ID.COLOR_SCHEME_SELECT)
+        }
+
+    }
+
+
+
     init();
 
 }

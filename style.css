@@ -25,7 +25,7 @@ select {
 }
 #canvas_container {
     position: relative;
-    border:1px solid green;
+    box-shadow:10px 10px lightgrey;
     align-self: center;
 }
 button {
@@ -66,4 +66,8 @@ button {
 }
 #spinner_container {
     position: relative
+}
+#disclaimer {
+    font-size: small;
+    padding-top: 20px;
 }
